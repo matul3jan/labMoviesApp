@@ -7,16 +7,14 @@ import StarRate from "@mui/icons-material/StarRate";
 import Typography from "@mui/material/Typography";
 
 const styles = {
-  root: {
-    chipSet: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      flexWrap: "wrap",
-      listStyle: "none",
-      padding: 1.5,
-      margin: 0,
-    },
+  chipSet: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexWrap: "wrap",
+    listStyle: "none",
+    padding: 1.5,
+    margin: 0,
   },
   chipLabel: {
     margin: 0.5,
