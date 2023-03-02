@@ -22,7 +22,7 @@ const UpcomingMoviesPage = (props) => {
 
   return (
     <PageTemplate
-      title="Discover Movies"
+      title="Upcoming Movies"
       movies={movies}
       selectFavourite={addToFavourites}
     />
