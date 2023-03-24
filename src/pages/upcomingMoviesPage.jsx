@@ -46,7 +46,7 @@ const UpcomingMoviesPage = (props) => {
     setFilterValues(newFilters);
   };
 
-  const movies = data || [];
+  const movies = data ? data.results : [];
   const displayedMovies = filterFunction(movies);
 
   return (
