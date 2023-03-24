@@ -55,7 +55,7 @@ const UpcomingMoviesPage = (props) => {
         title="Upcoming Movies"
         movies={displayedMovies}
         action={(movie) => {
-          return <AddToFavouritesIcon movie={movie} />;
+          return <AddToFavouritesIcon movie={movie} page="upcoming" />;
         }}
       />
       <MovieFilterUI
