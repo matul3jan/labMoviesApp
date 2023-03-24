@@ -20,7 +20,7 @@ const styles = {
 
 const MovieHeader = (props) => {
   const movie = props.movie;
-  const movies = JSON.parse(localStorage.getItem("favourites"));
+  const movies = JSON.parse(localStorage.getItem("favourites")) || [];
   const isFavourite = movies.find((m) => m.id === movie.id);
 
   return (
