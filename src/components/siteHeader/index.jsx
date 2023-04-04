@@ -12,17 +12,13 @@ import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-const styles = {
-  title: {
-    flexGrow: 1,
-  },
-  appbar: {
-    // background: 'none',
-  },
-  // offset: theme.mixins.toolbar,
-};
-
+const styles = { title: { flexGrow: 1 }, appbar: { background: "#2d2b2b" } };
 const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
+const menuOptions = [
+  { label: "Home", path: "/" },
+  { label: "Upcoming", path: "/movies/upcoming" },
+  { label: "Favorites", path: "/movies/favourites" },
+];
 
 const SiteHeader = () => {
   const navigate = useNavigate();
@@ -30,22 +26,8 @@ const SiteHeader = () => {
   const open = Boolean(anchorEl);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
-
-  const menuOptions = [
-    { label: "Home", path: "/" },
-    { label: "Upcoming", path: "/movies/upcoming" },
-    { label: "Favorites", path: "/movies/favourites" },
-    { label: "Option 3", path: "/" },
-    { label: "Option 4", path: "/" },
-  ];
-
-  const handleMenuSelect = (pageURL) => {
-    navigate(pageURL);
-  };
-
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  const handleMenuSelect = (pageURL) => navigate(pageURL);
+  const handleMenu = (event) => setAnchorEl(event.currentTarget);
 
   return (
     <>
@@ -53,9 +35,6 @@ const SiteHeader = () => {
         <Toolbar>
           <Typography variant="h4" sx={styles.title}>
             TMDB Client
-          </Typography>
-          <Typography variant="h6" sx={styles.title}>
-            All you ever wanted to know about Movies!
           </Typography>
           {isMobile ? (
             <>
@@ -110,8 +89,6 @@ const SiteHeader = () => {
         </Toolbar>
       </AppBar>
       <Offset />
-
-      {/* <div className={classes.offset} /> */}
     </>
   );
 };

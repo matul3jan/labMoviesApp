@@ -13,14 +13,11 @@ export const genreFilter = function (movie, value) {
 };
 
 const styles = {
-  root: {
-    backgroundColor: "#bfbfbf",
-  },
   fab: {
     marginTop: 8,
     position: "fixed",
     top: 20,
-    right: 2,
+    right: 25,
   },
 };
 

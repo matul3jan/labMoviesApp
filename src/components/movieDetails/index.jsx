@@ -19,14 +19,14 @@ const styles = {
     flexWrap: "wrap",
     listStyle: "none",
     padding: 1.5,
-    margin: 0,
+    marginTop: "10px",
   },
   chipLabel: {
     margin: 0.5,
   },
   fab: {
     position: "fixed",
-    top: 50,
+    top: 85,
     right: 2,
   },
 };

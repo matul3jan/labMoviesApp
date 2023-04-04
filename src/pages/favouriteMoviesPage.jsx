@@ -15,6 +15,7 @@ const titleFiltering = {
   value: "",
   condition: titleFilter,
 };
+
 export const genreFiltering = {
   name: "genre",
   value: "0",
@@ -69,10 +70,10 @@ const FavouriteMoviesPage = () => {
         movies={displayMovies}
         action={(movie) => {
           return (
-            <>
-              <RemoveFromFavourites movie={movie} />
+            <span>
               <WriteReview movie={movie} />
-            </>
+              <RemoveFromFavourites movie={movie} />
+            </span>
           );
         }}
       />
