@@ -69,3 +69,8 @@ export const getRecommendedMovies = (id) =>
     fetch(`https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${TMDB_KEY}`)
         .then((res) => res.json())
         .then((json) => json.results);
+
+export const getMovieCast = (id) =>
+    fetch(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${TMDB_KEY}`)
+        .then((res) => res.json())
+        .then((json) => json.cast);
