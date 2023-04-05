@@ -44,25 +44,23 @@ export default function MovieCard({ movie, action }) {
   const { favourites } = useContext(MoviesContext);
   const [raised, setRaised] = useState(false);
   const toggleRaised = () => setRaised(!raised);
-  const openDetails = () => navigate(`/movies/${movie.id}`);
+  const openDetails = (e) => {
+    if (e.target instanceof SVGElement) return;
+    navigate(`/movies/${movie.id}`);
+  };
 
-  if (favourites.find((id) => id === movie.id)) {
-    movie.favourite = true;
-  } else {
-    movie.favourite = false;
-  }
+  movie.favourite = favourites.some((id) => id === movie.id);
 
   return (
     <Card
       onMouseOver={toggleRaised}
       onMouseOut={toggleRaised}
-      style={raised ? styles.raised : null}
+      style={styles.raised}
       raised={raised}
       elevation={raised ? 24 : 0}
+      onClick={openDetails}
     >
       <CardHeader
-        sx={styles.header}
-        style={{ justifyContent: "right", display: "flex" }}
         avatar={
           movie.favourite ? (
             <Avatar sx={styles.avatar}>
@@ -71,11 +69,10 @@ export default function MovieCard({ movie, action }) {
           ) : null
         }
         title={
-          <Typography variant="body1" component="p" noWrap={true}>
+          <Typography variant="body1" component="p" noWrap>
             {movie.title}
           </Typography>
         }
-        onClick={openDetails}
       />
       <CardMedia
         sx={styles.media}
@@ -84,17 +81,16 @@ export default function MovieCard({ movie, action }) {
             ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
             : img
         }
-        onClick={openDetails}
       />
       <CardContent sx={styles.card}>
         <Grid container sx={styles.card.container}>
-          <Grid item xs={5} onClick={openDetails}>
+          <Grid item xs={5}>
             <Typography variant="body1" component="p">
               <CalendarIcon fontSize="" />
               <span style={styles.footer}>{movie.release_date}</span>
             </Typography>
           </Grid>
-          <Grid item xs={3} onClick={openDetails}>
+          <Grid item xs={3}>
             <Typography variant="h6" component="p">
               <StarRateIcon fontSize="small" />
               <span style={styles.footer}>{movie.vote_average.toFixed(1)}</span>

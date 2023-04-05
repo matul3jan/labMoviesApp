@@ -35,7 +35,7 @@ const MovieHeader = (props) => {
           <FavoriteIcon />
         </Avatar>
       ) : null}
-      <Typography variant="h5" component="h3">
+      <Typography variant="h5" component="h3" align="center">
         <a href={movie.homepage} target="_blank" style={styles.movieTitle}>
           {movie.title}
         </a>

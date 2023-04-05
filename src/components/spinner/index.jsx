@@ -8,13 +8,14 @@ const styles = {
     "& > * + *": {
       marginLeft: 2,
     },
+    height: "100vh",
+    alignItems: "center",
   },
 };
 
 export default function CircularIndeterminate() {
   return (
-    <div sx={styles.root}>
-      <CircularProgress />
+    <div style={styles.root}>
       <CircularProgress />
     </div>
   );

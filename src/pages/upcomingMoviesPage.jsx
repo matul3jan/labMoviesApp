@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
@@ -9,6 +9,7 @@ import MovieFilterUI, {
   genreFilter,
 } from "../components/movieFilterUI";
 import AddToFavouritesIcon from "../components/cardIcons/addToFavourites";
+import { MoviesContext } from "../contexts/moviesContext";
 
 const titleFiltering = {
   name: "title",
@@ -22,16 +23,18 @@ const genreFiltering = {
 };
 
 const UpcomingMoviesPage = (props) => {
-  const { data, error, isLoading, isError } = useQuery(
-    "upcoming",
-    getUpcomingMovies
+  const { pageUpcomingMovies, setPageUpcomingMovies } =
+    useContext(MoviesContext);
+  const { isLoading, isError, error, data, isFetching } = useQuery(
+    ["upcoming", pageUpcomingMovies],
+    () => getUpcomingMovies(pageUpcomingMovies)
   );
   const { filterValues, setFilterValues, filterFunction } = useFiltering(
     [],
     [titleFiltering, genreFiltering]
   );
 
-  if (isLoading) {
+  if (isLoading || isFetching) {
     return <Spinner />;
   }
 
@@ -57,6 +60,8 @@ const UpcomingMoviesPage = (props) => {
         action={(movie) => {
           return <AddToFavouritesIcon movie={movie} page="upcoming" />;
         }}
+        page={pageUpcomingMovies}
+        pageSetter={setPageUpcomingMovies}
       />
       <MovieFilterUI
         filterInputChange={changeFilterValues}
