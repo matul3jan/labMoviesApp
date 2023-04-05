@@ -70,6 +70,11 @@ export const getRecommendedMovies = (id) =>
         .then((res) => res.json())
         .then((json) => json.results);
 
+export const getSimilarMovies = (id) =>
+    fetch(`https://api.themoviedb.org/3/movie/${id}/similar?api_key=${TMDB_KEY}`)
+        .then((res) => res.json())
+        .then((json) => json.results);
+
 export const getMovieCast = (id) =>
     fetch(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${TMDB_KEY}`)
         .then((res) => res.json())

@@ -5,7 +5,7 @@ import MovieCard from "../movieCard";
 import Spinner from "../spinner";
 import AddToFavouritesIcon from "../cardIcons/addToFavourites";
 
-import { getRecommendedMovies } from "../../api/tmdb-api";
+import { getSimilarMovies } from "../../api/tmdb-api";
 import { Typography } from "@mui/material";
 
 const styles = {
@@ -21,10 +21,10 @@ const styles = {
   },
 };
 
-const RecommendedMovieList = ({ movie }) => {
+const SimilarMovieList = ({ movie }) => {
   const { isLoading, isError, error, data } = useQuery(
-    ["recommended movies", movie],
-    () => getRecommendedMovies(movie.id)
+    ["similar movies", movie],
+    () => getSimilarMovies(movie.id)
   );
 
   if (isLoading) {
@@ -50,11 +50,11 @@ const RecommendedMovieList = ({ movie }) => {
         ))
       ) : (
         <Typography variant="subtitle2" padding={2}>
-          Sorry, no recommendations for now !
+          Sorry, no similar movies for now !
         </Typography>
       )}
     </div>
   );
 };
 
-export default RecommendedMovieList;
+export default SimilarMovieList;

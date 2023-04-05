@@ -13,6 +13,7 @@ import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../movieReviews";
 import RecommendedMovieList from "../recommendedMovieList";
 import MovieCastList from "../movieCast";
+import SimilarMovieList from "../similarMovieList";
 
 const styles = {
   chipSet: {
@@ -87,6 +88,15 @@ const MovieDetails = ({ movie }) => {
           Cast
         </Typography>
         <MovieCastList movie={movie} />
+      </Paper>
+
+      <br />
+
+      <Paper>
+        <Typography variant="h6" component="h6" padding={2}>
+          Similar movies
+        </Typography>
+        <SimilarMovieList movie={movie} />
       </Paper>
 
       <br />
