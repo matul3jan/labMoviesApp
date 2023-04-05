@@ -1,15 +1,17 @@
 import React, { useContext } from "react";
-import PageTemplate from "../components/templateMovieListPage";
 import { useQuery } from "react-query";
+
 import Spinner from "../components/spinner";
-import { getMovies } from "../api/tmdb-api";
+import MovieListPageTemplate from "../components/templateMovieListPage";
 import useFiltering from "../hooks/useFiltering";
+import AddToFavouritesIcon from "../components/cardIcons/addToFavourites";
 import MovieFilterUI, {
   titleFilter,
   genreFilter,
 } from "../components/movieFilterUI";
-import AddToFavouritesIcon from "../components/cardIcons/addToFavourites";
+
 import { MoviesContext } from "../contexts/moviesContext";
+import { getMovies } from "../api/tmdb-api";
 
 const titleFiltering = {
   name: "title",
@@ -22,27 +24,22 @@ const genreFiltering = {
   condition: genreFilter,
 };
 
-const HomePage = (props) => {
+const HomePage = ({}) => {
   const { pageMovies, setPageMovies } = useContext(MoviesContext);
   const { isLoading, isError, error, data, isFetching } = useQuery(
     ["discover", pageMovies],
     () => getMovies(pageMovies),
-    {
-      keepPreviousData: true,
-    }
+    { keepPreviousData: true }
   );
+
   const { filterValues, setFilterValues, filterFunction } = useFiltering(
     [],
     [titleFiltering, genreFiltering]
   );
 
-  if (isLoading || isFetching) {
-    return <Spinner />;
-  }
+  if (isLoading || isFetching) return <Spinner />;
 
-  if (isError) {
-    return <h1>{error.message}</h1>;
-  }
+  if (isError) return <h1>{error.message}</h1>;
 
   const changeFilterValues = (type, value) => {
     const changedFilter = { name: type, value: value };
@@ -58,7 +55,7 @@ const HomePage = (props) => {
 
   return (
     <>
-      <PageTemplate
+      <MovieListPageTemplate
         title="Discover Movies"
         movies={displayedMovies}
         action={(movie) => {

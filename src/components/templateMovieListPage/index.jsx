@@ -21,4 +21,5 @@ function MovieListPageTemplate({ movies, title, action, page, pageSetter }) {
     </Grid>
   );
 }
+
 export default MovieListPageTemplate;

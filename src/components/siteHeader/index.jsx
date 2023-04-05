@@ -17,6 +17,7 @@ const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
 const menuOptions = [
   { label: "Home", path: "/" },
   { label: "Upcoming", path: "/movies/upcoming" },
+  { label: "Artists", path: "/artists/popular" },
   { label: "Favorites", path: "/movies/favourites" },
 ];
 

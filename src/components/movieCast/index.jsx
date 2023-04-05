@@ -1,11 +1,9 @@
 import React from "react";
 import { useQuery } from "react-query";
 
-import { Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
 import Spinner from "../spinner";
-import img from "../../images/film-poster-placeholder.png";
-
 import { getMovieCast } from "../../api/tmdb-api";
+import CastCard from "../castCard";
 
 const styles = {
   container: {
@@ -16,9 +14,6 @@ const styles = {
   card: {
     marginLeft: "20px",
     minWidth: "170px",
-  },
-  media: {
-    height: "150px",
   },
 };
 
@@ -40,33 +35,11 @@ const MovieCastList = ({ movie }) => {
     <div style={styles.container}>
       {data.map((cast) => (
         <div key={cast.id} style={styles.card}>
-          <Card>
-            <CardMedia
-              sx={styles.media}
-              image={
-                cast.profile_path
-                  ? `https://image.tmdb.org/t/p/w500/${cast.profile_path}`
-                  : img
-              }
-            />
-            <CardContent>
-              <Grid container>
-                <Grid item>
-                  <Typography variant="subtitle2" component="p">
-                    {cast.name}
-                  </Typography>
-                  <Typography
-                    noWrap={true}
-                    variant="caption"
-                    component="p"
-                    fontStyle="italic"
-                  >
-                    {cast.character}
-                  </Typography>
-                </Grid>
-              </Grid>
-            </CardContent>
-          </Card>
+          <CastCard
+            imagePath={cast.profile_path}
+            title={cast.name}
+            subtitle={cast.character}
+          />
         </div>
       ))}
     </div>
