@@ -4,12 +4,14 @@ import Paper from "@mui/material/Paper";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import MonetizationIcon from "@mui/icons-material/MonetizationOn";
 import StarRate from "@mui/icons-material/StarRate";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import Typography from "@mui/material/Typography";
 
 import NavigationIcon from "@mui/icons-material/Navigation";
 import Fab from "@mui/material/Fab";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../movieReviews";
+import RecommendedMovieList from "../recommendedMovieList";
 
 const styles = {
   chipSet: {
@@ -18,8 +20,7 @@ const styles = {
     alignItems: "center",
     flexWrap: "wrap",
     listStyle: "none",
-    padding: 1.5,
-    marginTop: "10px",
+    padding: 2,
   },
   chipLabel: {
     margin: 0.5,
@@ -32,17 +33,19 @@ const styles = {
 };
 
 const MovieDetails = ({ movie }) => {
-  const [drawerOpen, setDrawerOpen] = useState(false); // New
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   return (
     <>
-      <Typography variant="h5" component="h3">
-        Overview
-      </Typography>
-
-      <Typography variant="h6" component="p">
-        {movie.overview}
-      </Typography>
+      <br />
+      <Paper>
+        <Typography variant="h6" component="h6" padding={2}>
+          Overview
+        </Typography>
+        <Typography variant="body2" component="p" padding={2}>
+          {movie.overview}
+        </Typography>
+      </Paper>
 
       <Paper component="ul" sx={styles.chipSet}>
         <li>
@@ -50,22 +53,43 @@ const MovieDetails = ({ movie }) => {
         </li>
         {movie.genres.map((g) => (
           <li key={g.name}>
-            <Chip label={g.name} />
+            <Chip label={g.name} sx={styles.chipLabel} />
           </li>
         ))}
       </Paper>
+
       <Paper component="ul" sx={styles.chipSet}>
-        <Chip icon={<AccessTimeIcon />} label={`${movie.runtime} min.`} />
+        <Chip
+          icon={<AccessTimeIcon />}
+          label={`${movie.runtime} min.`}
+          sx={styles.chipLabel}
+        />
         <Chip
           icon={<MonetizationIcon />}
           label={`${movie.revenue.toLocaleString()}`}
+          sx={styles.chipLabel}
         />
         <Chip
           icon={<StarRate />}
           label={`${movie.vote_average} (${movie.vote_count}`}
+          sx={styles.chipLabel}
         />
-        <Chip label={`Released: ${movie.release_date}`} />
+        <Chip
+          icon={<CalendarMonthIcon />}
+          label={movie.release_date}
+          sx={styles.chipLabel}
+        />
       </Paper>
+
+      <Paper component="ul">Cast</Paper>
+
+      <Paper>
+        <Typography variant="h6" component="h6" padding={2}>
+          Recommended movies
+        </Typography>
+        <RecommendedMovieList movie={movie} />
+      </Paper>
+
       <Fab
         color="secondary"
         variant="extended"
