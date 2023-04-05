@@ -35,6 +35,7 @@ const MoviesContextProvider = (props) => {
     setMustWatchMovies(mustWatchMovies.filter((mId) => mId !== movie.id));
 
   const isInMustWatchList = (movie) => mustWatchMovies.includes(movie.id);
+  const isInFavorites = (id) => favourites.some((f) => f === id);
 
   return (
     <MoviesContext.Provider
@@ -46,6 +47,7 @@ const MoviesContextProvider = (props) => {
         addToMustWatchMovies,
         removeFromMustWatchMovies,
         isInMustWatchList,
+        isInFavorites,
         pageMovies,
         setPageMovies,
         pageUpcomingMovies,
