@@ -90,3 +90,8 @@ export const getPopularArtists = (page) =>
         }).catch((error) => {
             throw error
         });
+
+export const getArtistDetails = (id) =>
+    fetch(`https://api.themoviedb.org/3/person/${id}?api_key=${TMDB_KEY}`)
+        .then((res) => res.json())
+        .then((json) => json);

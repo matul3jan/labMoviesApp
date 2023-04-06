@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 
 import MovieHeader from "../headerMovie";
@@ -44,11 +43,7 @@ const TemplateMoviePage = ({ movie, children }) => {
           <div sx={styles.gridListRoot}>
             <ImageList cols={1}>
               {images.map((image) => (
-                <ImageListItem
-                  key={image.file_path}
-                  sx={styles.gridListTile}
-                  cols={1}
-                >
+                <ImageListItem key={image.file_path} cols={1}>
                   <img
                     src={`https://image.tmdb.org/t/p/w500/${image.file_path}`}
                     alt={image.poster_path}

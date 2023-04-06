@@ -14,6 +14,7 @@ import MoviesContextProvider from "./contexts/moviesContext";
 import ArtistsContextProvider from "./contexts/artistsContext";
 import AddMovieReviewPage from "./pages/addMovieReviewPage";
 import PopularArtistsPage from "./pages/popularArtistsPage";
+import TemplateArtistPage from "./components/templateArtistPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -42,6 +43,7 @@ const App = () => {
               />
               <Route path="/movies/:id" element={<MoviePage />} />
               <Route path="/artists/popular" element={<PopularArtistsPage />} />
+              <Route path="/artists/:id" element={<TemplateArtistPage />} />
               <Route path="/" element={<HomePage />} />
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>

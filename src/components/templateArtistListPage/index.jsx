@@ -25,6 +25,7 @@ const ArtistListPageTemplate = ({ artists, title, page, pageSetter }) => (
           <Grid key={artist.id} item xs={12} sm={2} md={2} lg={2} xl={2}>
             <CastCard
               key={artist.id}
+              id={artist.id}
               imagePath={artist.profile_path}
               title={artist.name}
               subtitle={subtitle}

@@ -1,15 +1,22 @@
 import { Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
 import img from "../../images/film-poster-placeholder.png";
+import { useNavigate } from "react-router-dom";
 
 const styles = {
   media: {
     height: "200px",
   },
+  card: {
+    cursor: "pointer",
+  },
 };
 
-const CastCard = ({ title, subtitle, imagePath }) => {
+const CastCard = ({ id, title, subtitle, imagePath }) => {
+  const navigate = useNavigate();
+  const openDetails = () => navigate(`/artists/${id}`);
+
   return (
-    <Card>
+    <Card onClick={openDetails} style={styles.card}>
       <CardMedia
         sx={styles.media}
         image={imagePath ? `https://image.tmdb.org/t/p/w500/${imagePath}` : img}
