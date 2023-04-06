@@ -33,8 +33,8 @@ const MovieCastList = ({ movie }) => {
 
   return (
     <div style={styles.container}>
-      {data.map((cast) => (
-        <div key={"" + movie.id + cast.id} style={styles.card}>
+      {data.map((cast, index) => (
+        <div key={index + "-" + cast.id} style={styles.card}>
           <CastCard
             id={cast.id}
             imagePath={cast.profile_path}

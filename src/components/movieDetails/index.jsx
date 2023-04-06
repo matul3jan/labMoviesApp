@@ -32,6 +32,11 @@ const styles = {
     top: 85,
     right: 20,
   },
+  content: {
+    whiteSpace: "pre-line",
+    padding: "0px 1.2em 1.2em 1.2em",
+    textAlign: "justify",
+  },
 };
 
 const MovieDetails = ({ movie }) => {
@@ -44,8 +49,13 @@ const MovieDetails = ({ movie }) => {
         <Typography variant="h6" component="h6" padding={2}>
           Overview
         </Typography>
-        <Typography variant="body2" component="p" padding={2}>
-          {movie.overview}
+        <Typography
+          variant="body2"
+          component="p"
+          padding={2}
+          style={styles.content}
+        >
+          {movie.overview || "-"}
         </Typography>
       </Paper>
 
