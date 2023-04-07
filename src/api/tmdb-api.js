@@ -25,7 +25,7 @@ export const getMovie = (args) => {
     });
 };
 
-export const getGenres = async () =>
+export const getGenres = () =>
     fetch("https://api.themoviedb.org/3/genre/movie/list?api_key=" + TMDB_KEY + "&language=en-US")
         .then((response) => {
             if (!response.ok) {
@@ -36,9 +36,8 @@ export const getGenres = async () =>
             throw error
         });
 
-export const getMovieImages = ({ queryKey }) => {
-    const [, { id }] = queryKey;
-    return fetch(`https://api.themoviedb.org/3/movie/${id}/images?api_key=${TMDB_KEY}`)
+export const getMovieImages = (id) =>
+    fetch(`https://api.themoviedb.org/3/movie/${id}/images?api_key=${TMDB_KEY}`)
         .then((response) => {
             if (!response.ok) {
                 throw new Error(response.json().message);
@@ -47,7 +46,6 @@ export const getMovieImages = ({ queryKey }) => {
         }).catch((error) => {
             throw error
         });
-};
 
 export const getMovieReviews = (id) =>
     fetch(`https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${TMDB_KEY}`)

@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import { useQuery } from "react-query";
 
 import Spinner from "../spinner";
@@ -9,17 +8,18 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
-import SortIcon from "@mui/icons-material/Sort";
-import { getGenres } from "../../api/tmdb-api";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+
+import { getGenres } from "../../api/tmdb-api";
 
 const styles = {
   root: {
     maxWidth: 345,
   },
-  media: { height: 300 },
-
+  media: {
+    height: 300,
+  },
   formControl: {
     margin: 1,
     minWidth: 220,
@@ -27,16 +27,12 @@ const styles = {
   },
 };
 
-export default function FilterMoviesCard(props) {
+const FilterMoviesCard = ({ onUserInput, titleFilter, genreFilter }) => {
   const { data, error, isLoading, isError } = useQuery("genres", getGenres);
 
-  if (isLoading) {
-    return <Spinner />;
-  }
+  if (isLoading) return <Spinner />;
+  if (isError) return <h1>{error.message}</h1>;
 
-  if (isError) {
-    return <h1>{error.message}</h1>;
-  }
   const genres = data.genres;
   if (genres[0].name !== "All") {
     genres.unshift({ id: "0", name: "All" });
@@ -44,16 +40,11 @@ export default function FilterMoviesCard(props) {
 
   const handleUserImput = (e, type, value) => {
     e.preventDefault();
-    props.onUserInput(type, value); // NEW
+    onUserInput(type, value);
   };
 
-  const handleTextChange = (e, props) => {
-    handleUserImput(e, "title", e.target.value);
-  };
-
-  const handleGenreChange = (e) => {
-    handleUserImput(e, "genre", e.target.value);
-  };
+  const handleTextChange = (e) => handleUserImput(e, "title", e.target.value);
+  const handleGenreChange = (e) => handleUserImput(e, "genre", e.target.value);
 
   return (
     <>
@@ -68,7 +59,7 @@ export default function FilterMoviesCard(props) {
             id="filled-search"
             label="Search field"
             type="search"
-            value={props.titleFilter}
+            value={titleFilter}
             variant="filled"
             onChange={handleTextChange}
           />
@@ -77,7 +68,7 @@ export default function FilterMoviesCard(props) {
             <Select
               labelId="genre-label"
               id="genre-select"
-              value={props.genreFilter}
+              value={genreFilter}
               onChange={handleGenreChange}
             >
               {genres.map((genre) => {
@@ -91,14 +82,8 @@ export default function FilterMoviesCard(props) {
           </FormControl>
         </CardContent>
       </Card>
-      <Card sx={styles.root} variant="outlined">
-        <CardContent>
-          <Typography variant="h5" component="h1">
-            <SortIcon fontSize="large" />
-            Sort the movies.
-          </Typography>
-        </CardContent>
-      </Card>
     </>
   );
-}
+};
+
+export default FilterMoviesCard;
