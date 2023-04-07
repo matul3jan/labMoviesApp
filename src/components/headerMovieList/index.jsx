@@ -23,23 +23,27 @@ const styles = {
 const Header = ({ title, page, pageSetter }) => {
   return (
     <Paper component="div" sx={styles.root}>
-      <IconButton
-        aria-label="go back"
-        disabled={page === 1}
-        style={page === 1 ? styles.disabledBtn : null}
-        onClick={() => pageSetter((old) => Math.max(old - 1, 1))}
-      >
-        <ArrowBackIcon color="primary" fontSize="large" />
-      </IconButton>
+      {page && (
+        <IconButton
+          aria-label="go back"
+          disabled={page === 1}
+          style={page === 1 ? styles.disabledBtn : null}
+          onClick={() => pageSetter((old) => Math.max(old - 1, 1))}
+        >
+          <ArrowBackIcon color="primary" fontSize="large" />
+        </IconButton>
+      )}
       <Typography variant="h5" component="h3">
         {title}
       </Typography>
-      <IconButton
-        aria-label="go forward"
-        onClick={() => pageSetter((old) => old + 1)}
-      >
-        <ArrowForwardIcon color="primary" fontSize="large" />
-      </IconButton>
+      {pageSetter && (
+        <IconButton
+          aria-label="go forward"
+          onClick={() => pageSetter((old) => old + 1)}
+        >
+          <ArrowForwardIcon color="primary" fontSize="large" />
+        </IconButton>
+      )}
     </Paper>
   );
 };

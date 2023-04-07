@@ -1,8 +1,12 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Navigate, Routes } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { supabase } from "./api/supabaseClient";
+import Auth from "./auth/Auth";
+import Account from "./auth/Account";
 
 import HomePage from "./pages/homePage";
 import MoviePage from "./pages/movieDetailsPage";
@@ -27,7 +31,18 @@ const queryClient = new QueryClient({
 });
 
 const App = () => {
-  return (
+  const [session, setSession] = useState(null);
+
+  useEffect(() => {
+    supabase.auth
+      .getSession()
+      .then(({ data: { session } }) => setSession(session));
+    supabase.auth.onAuthStateChange((_event, session) => setSession(session));
+  }, []);
+
+  return !session ? (
+    <Auth />
+  ) : (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <SiteHeader />
@@ -40,6 +55,10 @@ const App = () => {
               <Route
                 path="/movies/favourites"
                 element={<FavouriteMoviesPage />}
+              />
+              <Route
+                path="/account"
+                element={<Account key={session.user.id} session={session} />}
               />
               <Route path="/movies/:id" element={<MoviePage />} />
               <Route path="/artists/popular" element={<PopularArtistsPage />} />
