@@ -30,5 +30,5 @@ To run this application locally, you need to have Node.js installed on your syst
 2. Navigate to the root folder of the repository in your terminal
 3. Run `npm install` to install the required dependencies
 4. Create `.env` file in root folder of the repo and add your Supabase credentials (VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY) and TMDB API (VITE_TMDB_KEY) key
-5. Run `npm start` to start the development server
+5. Run `npm run dev` to start the development server
 6. Open [http://localhost:5173](http://localhost:5173) in your browser to view the application
