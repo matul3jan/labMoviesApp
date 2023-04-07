@@ -8,7 +8,10 @@ const styles = {
   container: {
     alignItems: "center",
     flexDirection: "column",
-    marginTop: "10px",
+    backgroundColor: "white",
+    width: "40%",
+    margin: "0px auto",
+    padding: "20px",
   },
 };
 
@@ -83,7 +86,7 @@ export default function Account({ session }) {
             }}
           />
         </Grid>
-        <Grid item width={500}>
+        <Grid item width="100%">
           <TextField
             fullWidth
             id="email"
@@ -92,7 +95,7 @@ export default function Account({ session }) {
             value={session.user.email}
           />
         </Grid>
-        <Grid item width={500}>
+        <Grid item width="100%">
           <TextField
             fullWidth
             id="username"
@@ -102,7 +105,7 @@ export default function Account({ session }) {
             onChange={(e) => setUsername(e.target.value)}
           />
         </Grid>
-        <Grid item width={500}>
+        <Grid item width="100%">
           <TextField
             fullWidth
             id="website"

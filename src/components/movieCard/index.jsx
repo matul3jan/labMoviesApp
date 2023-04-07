@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Card from "@mui/material/Card";
@@ -12,8 +12,8 @@ import StarRateIcon from "@mui/icons-material/StarRate";
 import Grid from "@mui/material/Grid";
 import Avatar from "@mui/material/Avatar";
 
-import { MoviesContext } from "../../contexts/moviesContext";
 import img from "../../images/film-poster-placeholder.png";
+import useFavourites from "../../hooks/useFavorites";
 
 const styles = {
   card: {
@@ -41,7 +41,7 @@ const styles = {
 
 export default function MovieCard({ movie, action }) {
   const navigate = useNavigate();
-  const { favourites } = useContext(MoviesContext);
+  const { data } = useFavourites();
   const [raised, setRaised] = useState(false);
   const toggleRaised = () => setRaised(!raised);
   const openDetails = (e) => {
@@ -49,7 +49,8 @@ export default function MovieCard({ movie, action }) {
     navigate(`/movies/${movie.id}`);
   };
 
-  movie.favourite = favourites.some((id) => id === movie.id);
+  const favourites = data || [];
+  movie.favourite = favourites.some((fav) => fav.movie_id === movie.id);
 
   return (
     <Card

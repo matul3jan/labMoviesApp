@@ -82,7 +82,7 @@ export default function Avatar({ url, size, onUpload }) {
           <AddAPhoto style={{ fontSize: size / 2 }} />
         </Box>
       )}
-      <Box marginTop={1} width={size} display="flex">
+      <Box marginTop={1} width={size} display="flex" marginLeft={5}>
         <input
           type="file"
           accept="image/*"

@@ -1,8 +1,6 @@
-import React, { useContext } from "react";
 import { useQueries } from "react-query";
 
 import PageTemplate from "../components/templateMovieListPage";
-import { MoviesContext } from "../contexts/moviesContext";
 import { getMovie } from "../api/tmdb-api";
 import Spinner from "../components/spinner";
 import useFiltering from "../hooks/useFiltering";
@@ -10,13 +8,16 @@ import MovieFilterUI, { titleFilter } from "../components/movieFilterUI";
 import RemoveFromFavourites from "../components/cardIcons/removeFromFavourites";
 import WriteReview from "../components/cardIcons/writeReview";
 
+import useFavourites from "../hooks/useFavorites";
+import { useEffect } from "react";
+
 const titleFiltering = {
   name: "title",
   value: "",
   condition: titleFilter,
 };
 
-export const genreFiltering = {
+const genreFiltering = {
   name: "genre",
   value: "0",
   condition: function (movie, value) {
@@ -29,29 +30,32 @@ export const genreFiltering = {
 };
 
 const FavouriteMoviesPage = () => {
-  const { favourites: movieIds } = useContext(MoviesContext);
+  const { data, isLoading, refetch } = useFavourites();
+
   const { filterValues, setFilterValues, filterFunction } = useFiltering(
     [],
     [titleFiltering, genreFiltering]
   );
 
+  useEffect(() => {
+    refetch();
+  }, []);
+
+  const favourites = data || [];
   // Create an array of queries and run them in parallel.
-  const favouriteMovieQueries = useQueries(
-    movieIds.map((movieId) => {
-      return {
-        queryKey: ["movie", { id: movieId }],
-        queryFn: getMovie,
-      };
-    })
+  const allQueries = useQueries(
+    favourites.map((fav) => ({
+      queryKey: ["movie", { id: fav.movie_id }],
+      queryFn: getMovie,
+    }))
   );
+
   // Check if any of the parallel queries is still loading.
-  const isLoading = favouriteMovieQueries.find((m) => m.isLoading === true);
+  const isMovieLoading = allQueries.find((m) => m.isLoading === true);
 
-  if (isLoading) {
-    return <Spinner />;
-  }
+  if (isLoading || isMovieLoading) return <Spinner />;
 
-  const allFavourites = favouriteMovieQueries.map((q) => q.data);
+  const allFavourites = allQueries.map((q) => q.data);
   const displayMovies = allFavourites ? filterFunction(allFavourites) : [];
 
   const changeFilterValues = (type, value) => {

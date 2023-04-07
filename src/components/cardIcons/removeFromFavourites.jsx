@@ -1,14 +1,20 @@
-import React, { useContext } from "react";
+import React, { useEffect } from "react";
 import IconButton from "@mui/material/IconButton";
-import { MoviesContext } from "../../contexts/moviesContext";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import useRemoveFromFavourites from "../../hooks/useRemoveFromFavourite";
+import useFavourites from "../../hooks/useFavorites";
 
 const RemoveFromFavouritesIcon = ({ movie }) => {
-  const context = useContext(MoviesContext);
+  const { mutate, isSuccess } = useRemoveFromFavourites(movie);
+  const { refetch } = useFavourites();
+
+  useEffect(() => {
+    refetch();
+  }, [isSuccess]);
 
   const onUserRequest = (e) => {
     e.preventDefault();
-    context.removeFromFavourites(movie);
+    mutate();
   };
 
   return (

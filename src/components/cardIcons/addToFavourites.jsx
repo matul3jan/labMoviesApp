@@ -1,21 +1,25 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { MoviesContext } from "../../contexts/moviesContext";
 import IconButton from "@mui/material/IconButton";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import PlaylistAddCheckCircleIcon from "@mui/icons-material/PlaylistAddCheckCircle";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import useAddToFavourites from "../../hooks/useAddToFavourite";
+import useFavourites from "../../hooks/useFavorites";
 
 const AddToFavouritesIcon = ({ movie, page = "" }) => {
-  const {
-    addToFavourites,
-    addToMustWatchMovies,
-    removeFromMustWatchMovies,
-    isInMustWatchList,
-  } = useContext(MoviesContext);
+  const { mutate, isSuccess } = useAddToFavourites(movie);
+  const { refetch } = useFavourites();
+  const { addToMustWatchMovies, removeFromMustWatchMovies, isInMustWatchList } =
+    useContext(MoviesContext);
 
-  const onUserSelect = (e) => {
+  useEffect(() => {
+    refetch();
+  }, [isSuccess]);
+
+  const onUserSelect = async (e) => {
     e.preventDefault();
-    addToFavourites(movie);
+    mutate();
   };
 
   const onAddPlaylist = (e) => {

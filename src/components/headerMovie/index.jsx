@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 
-import { MoviesContext } from "../../contexts/moviesContext";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Avatar from "@mui/material/Avatar";
+import useFavourites from "../../hooks/useFavorites";
 
 const styles = {
   root: {
@@ -20,8 +20,9 @@ const styles = {
 };
 
 const MovieHeader = ({ movie }) => {
-  const { isInFavorites } = useContext(MoviesContext);
-  const isFavourite = isInFavorites(movie.id);
+  const { data } = useFavourites();
+  const favourites = data || [];
+  const isFavourite = favourites.some((fav) => fav.movie_id === movie.id);
 
   return (
     <Paper sx={styles.root}>
