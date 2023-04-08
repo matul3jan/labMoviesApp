@@ -94,7 +94,9 @@ export default function MovieCard({ movie, action }) {
           <Grid item xs={3}>
             <Typography variant="h6" component="p">
               <StarRateIcon fontSize="small" />
-              <span style={styles.footer}>{movie.vote_average.toFixed(1)}</span>
+              <span style={styles.footer}>
+                {movie.vote_average?.toFixed(1)}
+              </span>
             </Typography>
           </Grid>
           <Grid item xs={4}>
