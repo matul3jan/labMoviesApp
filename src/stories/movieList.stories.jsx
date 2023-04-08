@@ -1,16 +1,21 @@
 import React from "react";
 import MovieList from "../components/movieList";
-import SampleMovie from "./sampleData";
+import { sampleMovie } from "./sampleData";
 import { MemoryRouter } from "react-router";
-import { action } from "@storybook/addon-actions";
 import AddToFavouritesIcon from "../components/cardIcons/addToFavourites";
 import Grid from "@mui/material/Grid";
 import MoviesContextProvider from "../contexts/moviesContext";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
 
 export default {
   title: "Home Page/MovieList",
   component: MovieList,
   decorators: [
+    (Story) => (
+      <QueryClientProvider client={queryClient}>{Story()}</QueryClientProvider>
+    ),
     (Story) => <MemoryRouter initialEntries={["/"]}>{Story()}</MemoryRouter>,
     (Story) => <MoviesContextProvider>{Story()}</MoviesContextProvider>,
   ],
@@ -18,11 +23,11 @@ export default {
 
 export const Basic = () => {
   const movies = [
-    { ...SampleMovie, id: 1 },
-    { ...SampleMovie, id: 2 },
-    { ...SampleMovie, id: 3 },
-    { ...SampleMovie, id: 4 },
-    { ...SampleMovie, id: 5 },
+    { ...sampleMovie, id: 1 },
+    { ...sampleMovie, id: 2 },
+    { ...sampleMovie, id: 3 },
+    { ...sampleMovie, id: 4 },
+    { ...sampleMovie, id: 5 },
   ];
   return (
     <Grid container spacing={5}>

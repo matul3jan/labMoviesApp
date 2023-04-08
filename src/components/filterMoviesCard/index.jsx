@@ -66,6 +66,7 @@ const FilterMoviesCard = ({ onUserInput, titleFilter, genreFilter }) => {
           <FormControl sx={styles.formControl}>
             <InputLabel id="genre-label">Genre</InputLabel>
             <Select
+              defaultValue=""
               labelId="genre-label"
               id="genre-select"
               value={genreFilter}

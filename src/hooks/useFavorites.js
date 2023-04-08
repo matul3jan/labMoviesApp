@@ -2,8 +2,8 @@ import { useQuery } from 'react-query'
 import { supabase } from "../api/supabaseClient";
 
 const getUser = async () => {
-    const { data: { session: { user } }, } = await supabase.auth.getSession()
-    return user;
+    const session = await supabase.auth.getSession();
+    return session?.data?.session?.user;
 }
 
 const fetchFavourites = async () => {
