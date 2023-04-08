@@ -97,6 +97,27 @@ The Movies application is a React SPA that displays information about popular mo
   <img width="800" alt="image" src="https://user-images.githubusercontent.com/26350749/230715793-cc942c16-f3ed-422e-a847-462c820c0c4d.png">
 </p>
 
+## Storybook
+
+> User Account story
+
+<p align="center">
+  <img width="800" alt="image" src="https://user-images.githubusercontent.com/26350749/230728348-550335d6-3a80-4707-bcfa-b16b55f6f8dc.png">
+</p>
+
+> Artist List story
+
+<p align="center">
+  <img width="800" alt="image" src="https://user-images.githubusercontent.com/26350749/230728395-843aeeab-8b22-45d3-8de4-b250f29b1fbd.png">
+</p>
+
+> Artist details story
+
+<p align="center">
+  <img width="800" alt="image" src="https://user-images.githubusercontent.com/26350749/230728444-df5fffe0-c1d3-4bdb-a20f-7720e4a46ea8.png">
+</p>
+
+
 ## Authentication
 
 | Route  | info |
