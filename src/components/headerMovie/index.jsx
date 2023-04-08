@@ -4,7 +4,7 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Avatar from "@mui/material/Avatar";
-import useFavourites from "../../hooks/useFavorites";
+import { useFavourites } from "../../hooks/useFavorites";
 
 const styles = {
   root: {

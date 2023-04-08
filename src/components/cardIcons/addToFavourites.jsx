@@ -4,8 +4,8 @@ import IconButton from "@mui/material/IconButton";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import PlaylistAddCheckCircleIcon from "@mui/icons-material/PlaylistAddCheckCircle";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import useAddToFavourites from "../../hooks/useAddToFavourite";
-import useFavourites from "../../hooks/useFavorites";
+import { useAddToFavourites } from "../../hooks/useFavorites";
+import { useFavourites } from "../../hooks/useFavorites";
 
 const AddToFavouritesIcon = ({ movie, page = "" }) => {
   const { mutate, isSuccess } = useAddToFavourites(movie);

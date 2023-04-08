@@ -8,7 +8,7 @@ import MovieFilterUI, { titleFilter } from "../components/movieFilterUI";
 import RemoveFromFavourites from "../components/cardIcons/removeFromFavourites";
 import WriteReview from "../components/cardIcons/writeReview";
 
-import useFavourites from "../hooks/useFavorites";
+import { useFavourites } from "../hooks/useFavorites";
 import { useEffect } from "react";
 
 const titleFiltering = {

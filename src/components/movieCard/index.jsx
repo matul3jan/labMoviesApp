@@ -13,7 +13,7 @@ import Grid from "@mui/material/Grid";
 import Avatar from "@mui/material/Avatar";
 
 import img from "../../images/film-poster-placeholder.png";
-import useFavourites from "../../hooks/useFavorites";
+import { useFavourites } from "../../hooks/useFavorites";
 
 const styles = {
   card: {

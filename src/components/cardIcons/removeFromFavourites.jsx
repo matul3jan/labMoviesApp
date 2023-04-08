@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import IconButton from "@mui/material/IconButton";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import useRemoveFromFavourites from "../../hooks/useRemoveFromFavourite";
-import useFavourites from "../../hooks/useFavorites";
+import { useRemoveFromFavourites } from "../../hooks/useFavorites";
+import { useFavourites } from "../../hooks/useFavorites";
 
 const RemoveFromFavouritesIcon = ({ movie }) => {
   const { mutate, isSuccess } = useRemoveFromFavourites(movie);
