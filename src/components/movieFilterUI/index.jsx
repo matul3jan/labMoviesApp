@@ -12,6 +12,10 @@ export const genreFilter = function (movie, value) {
   return genreId > 0 ? movie.genre_ids.includes(genreId) : true;
 };
 
+export const langFilter = function (movie, value) {
+  return value !== "0" ? movie.original_language === value : true;
+};
+
 const styles = {
   fab: {
     marginTop: 8,
@@ -21,7 +25,14 @@ const styles = {
   },
 };
 
-const MovieFilterUI = ({ onFilterValuesChange, titleFilter, genreFilter }) => {
+const MovieFilterUI = ({
+  onFilterValuesChange,
+  onSortValuesChange,
+  titleFilter,
+  genreFilter,
+  langFilter,
+  currentSort,
+}) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   return (
@@ -41,8 +52,11 @@ const MovieFilterUI = ({ onFilterValuesChange, titleFilter, genreFilter }) => {
       >
         <FilterCard
           onUserInput={onFilterValuesChange}
+          onUserSort={onSortValuesChange}
           titleFilter={titleFilter}
           genreFilter={genreFilter}
+          langFilter={langFilter}
+          currentSort={currentSort}
         />
       </Drawer>
     </>

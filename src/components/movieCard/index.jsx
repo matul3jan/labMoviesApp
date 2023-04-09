@@ -14,6 +14,7 @@ import Avatar from "@mui/material/Avatar";
 
 import img from "../../images/film-poster-placeholder.png";
 import { useFavourites } from "../../hooks/useFavorites";
+import { toReadableDate } from "../../util";
 
 const styles = {
   card: {
@@ -51,6 +52,7 @@ export default function MovieCard({ movie, action }) {
 
   const favourites = data || [];
   movie.favourite = favourites.some((fav) => fav.movie_id === movie.id);
+  movie.release_date_full = toReadableDate(movie.release_date);
 
   return (
     <Card
@@ -86,9 +88,9 @@ export default function MovieCard({ movie, action }) {
       <CardContent sx={styles.card}>
         <Grid container sx={styles.card.container}>
           <Grid item xs={5}>
-            <Typography variant="body1" component="p">
+            <Typography variant="body2" component="p">
               <CalendarIcon fontSize="" />
-              <span style={styles.footer}>{movie.release_date}</span>
+              <span style={styles.footer}>{movie.release_date_full}</span>
             </Typography>
           </Grid>
           <Grid item xs={3}>

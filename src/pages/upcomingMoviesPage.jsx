@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
@@ -10,6 +10,7 @@ import MovieFilterUI, {
 } from "../components/movieFilterUI";
 import AddToFavouritesIcon from "../components/cardIcons/addToFavourites";
 import { MoviesContext } from "../contexts/moviesContext";
+import { applySortValues } from "../util";
 
 const titleFiltering = {
   name: "title",
@@ -22,7 +23,8 @@ const genreFiltering = {
   condition: genreFilter,
 };
 
-const UpcomingMoviesPage = (props) => {
+const UpcomingMoviesPage = ({}) => {
+  const [sortValue, setSortValue] = useState("title_ASC");
   const { pageUpcomingMovies, setPageUpcomingMovies } =
     useContext(MoviesContext);
   const { isLoading, isError, error, data, isFetching } = useQuery(
@@ -50,7 +52,7 @@ const UpcomingMoviesPage = (props) => {
   };
 
   const movies = data ? data.results : [];
-  const displayedMovies = filterFunction(movies);
+  const displayedMovies = applySortValues(sortValue, filterFunction(movies));
 
   return (
     <>
@@ -65,8 +67,10 @@ const UpcomingMoviesPage = (props) => {
       />
       <MovieFilterUI
         filterInputChange={changeFilterValues}
+        onSortValuesChange={setSortValue}
         titleFilter={filterValues[0].value}
         genreFilter={filterValues[1].value}
+        currentSort={sortValue}
       />
     </>
   );

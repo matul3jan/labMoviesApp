@@ -26,6 +26,11 @@ export default {
 };
 
 export const Basic = () => {
-  return <FilterMoviesCard onUserInput={action("filter input")} />;
+  return (
+    <FilterMoviesCard
+      onUserInput={action("filter input")}
+      onUserSort={action("sort input")}
+    />
+  );
 };
 Basic.storyName = "Default";

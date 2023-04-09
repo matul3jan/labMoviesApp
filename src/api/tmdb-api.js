@@ -36,6 +36,18 @@ export const getGenres = () =>
             throw error
         });
 
+export const getLanguages = () =>
+    fetch("https://api.themoviedb.org/3/configuration/languages?api_key=" + TMDB_KEY + "&language=en-US")
+        .then(async (response) => {
+            if (!response.ok) {
+                throw new Error(response.json().message);
+            }
+            const languages = await response.json();
+            return languages.sort((a, b) => a.english_name.localeCompare(b.english_name));
+        }).catch((error) => {
+            throw error
+        });
+
 export const getMovieImages = (id) =>
     fetch(`https://api.themoviedb.org/3/movie/${id}/images?api_key=${TMDB_KEY}`)
         .then((response) => {

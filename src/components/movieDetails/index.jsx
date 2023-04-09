@@ -14,6 +14,8 @@ import MovieReviews from "../movieReviews";
 import RecommendedMovieList from "../recommendedMovieList";
 import MovieCastList from "../movieCast";
 import SimilarMovieList from "../similarMovieList";
+import { toReadableLanguage } from "../../util";
+import { LanguageOutlined } from "@mui/icons-material";
 
 const styles = {
   chipSet: {
@@ -89,6 +91,11 @@ const MovieDetails = ({ movie }) => {
         <Chip
           icon={<CalendarMonthIcon />}
           label={movie.release_date}
+          sx={styles.chipLabel}
+        />
+        <Chip
+          icon={<LanguageOutlined />}
+          label={toReadableLanguage(movie.original_language)}
           sx={styles.chipLabel}
         />
       </Paper>

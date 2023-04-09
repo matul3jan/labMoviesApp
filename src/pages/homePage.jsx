@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useQuery } from "react-query";
 
 import Spinner from "../components/spinner";
@@ -8,10 +8,12 @@ import AddToFavouritesIcon from "../components/cardIcons/addToFavourites";
 import MovieFilterUI, {
   titleFilter,
   genreFilter,
+  langFilter,
 } from "../components/movieFilterUI";
 
 import { MoviesContext } from "../contexts/moviesContext";
 import { getMovies } from "../api/tmdb-api";
+import { applySortValues, applyFilterValues } from "../util";
 
 const titleFiltering = {
   name: "title",
@@ -23,8 +25,14 @@ const genreFiltering = {
   value: "0",
   condition: genreFilter,
 };
+const langFiltering = {
+  name: "language",
+  value: "0",
+  condition: langFilter,
+};
 
 const HomePage = ({}) => {
+  const [sortValue, setSortValue] = useState("title_ASC");
   const { pageMovies, setPageMovies } = useContext(MoviesContext);
   const { isLoading, isError, error, data, isFetching } = useQuery(
     ["discover", pageMovies],
@@ -34,24 +42,19 @@ const HomePage = ({}) => {
 
   const { filterValues, setFilterValues, filterFunction } = useFiltering(
     [],
-    [titleFiltering, genreFiltering]
+    [titleFiltering, genreFiltering, langFiltering]
   );
 
   if (isLoading || isFetching) return <Spinner />;
 
   if (isError) return <h1>{error.message}</h1>;
 
-  const changeFilterValues = (type, value) => {
-    const changedFilter = { name: type, value: value };
-    const updatedFilterSet =
-      type === "title"
-        ? [changedFilter, filterValues[1]]
-        : [filterValues[0], changedFilter];
-    setFilterValues(updatedFilterSet);
-  };
+  const handleChangeFilterValues = (...args) =>
+    applyFilterValues(filterValues, setFilterValues, ...args);
 
   const movies = data ? data.results : [];
-  const displayedMovies = filterFunction(movies);
+
+  const displayedMovies = applySortValues(sortValue, filterFunction(movies));
 
   return (
     <>
@@ -65,9 +68,12 @@ const HomePage = ({}) => {
         pageSetter={setPageMovies}
       />
       <MovieFilterUI
-        onFilterValuesChange={changeFilterValues}
+        onFilterValuesChange={handleChangeFilterValues}
+        onSortValuesChange={setSortValue}
         titleFilter={filterValues[0].value}
         genreFilter={filterValues[1].value}
+        langFilter={filterValues[2].value}
+        currentSort={sortValue}
       />
     </>
   );
