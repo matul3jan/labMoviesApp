@@ -1,4 +1,5 @@
 import truncate from "lodash/truncate";
+import { getToken } from "./api/apiClient";
 
 export function excerpt(string) {
     return truncate(string, {
@@ -42,4 +43,16 @@ export function toReadableDate(date) {
 export function toReadableLanguage(code) {
     let languageNames = new Intl.DisplayNames(["en"], { type: "language" });
     return languageNames.of(code);
+}
+
+export function updateOptions(options) {
+    const update = { ...options };
+    const token = getToken();
+    if (token) {
+        update.headers = {
+            ...update.headers,
+            Authorization: token,
+        };
+    }
+    return update;
 }

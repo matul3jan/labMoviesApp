@@ -4,7 +4,6 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Navigate, Routes } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
-import { supabase } from "./api/supabaseClient";
 import Auth from "./auth/Auth";
 import Account from "./auth/Account";
 
@@ -19,6 +18,7 @@ import ArtistsContextProvider from "./contexts/artistsContext";
 import AddMovieReviewPage from "./pages/addMovieReviewPage";
 import PopularArtistsPage from "./pages/popularArtistsPage";
 import TemplateArtistPage from "./components/templateArtistPage";
+import { getToken, setToken, setUser } from "./api/apiClient";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -31,17 +31,16 @@ const queryClient = new QueryClient({
 });
 
 const App = () => {
-  const [session, setSession] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(Boolean(getToken()));
 
-  useEffect(() => {
-    supabase.auth
-      .getSession()
-      .then(({ data: { session } }) => setSession(session));
-    supabase.auth.onAuthStateChange((_event, session) => setSession(session));
-  }, []);
+  const setDefaultHeaders = ({ token, user }) => {
+    setToken(token);
+    setUser(user);
+    setLoggedIn(true);
+  };
 
-  return !session ? (
-    <Auth />
+  return !loggedIn ? (
+    <Auth setDefaultHeaders={setDefaultHeaders} />
   ) : (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
@@ -56,10 +55,7 @@ const App = () => {
                 path="/movies/favourites"
                 element={<FavouriteMoviesPage />}
               />
-              <Route
-                path="/account"
-                element={<Account key={session.user.id} session={session} />}
-              />
+              <Route path="/account" element={<Account />} />
               <Route path="/movies/:id" element={<MoviePage />} />
               <Route path="/artists/popular" element={<PopularArtistsPage />} />
               <Route path="/artists/:id" element={<TemplateArtistPage />} />

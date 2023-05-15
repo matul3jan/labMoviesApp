@@ -7,26 +7,31 @@ import {
   Button,
   Alert,
   Typography,
+  Tab,
+  Tabs,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
 import Spinner from "../components/spinner";
-import { supabase } from "../api/supabaseClient";
+import { authenticate, register } from "../api/apiClient";
 
-const Auth = () => {
+const Auth = ({ setDefaultHeaders }) => {
   const paperStyle = {
     padding: 20,
-    height: 250,
     width: 300,
     margin: "20vh auto",
   };
   const avatarStyle = { backgroundColor: "#1bbd7e" };
   const btnstyle = { marginTop: 20, height: 50 };
+  const fieldStyle = { marginTop: "10px" };
 
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [password, setPassword] = useState("");
+  const [tabValue, setTabValue] = useState(0);
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -37,21 +42,35 @@ const Auth = () => {
 
     setLoading(true);
 
-    const { error } = await supabase.auth.signInWithOtp({
-      email,
-      options: {
-        emailRedirectTo: window.location.origin,
-      },
-    });
-
-    if (error) {
-      setErrorMsg(error.error_description || error.message);
-    } else {
-      setSuccess(true);
+    try {
+      const response = await authenticate({ email, password });
+      setDefaultHeaders(response);
+    } catch (error) {
+      setErrorMsg(error.message);
     }
 
     setLoading(false);
   };
+
+  const handleRegister = async (event) => {
+    event.preventDefault();
+    if (!firstName || !lastName || !email || !password) {
+      alert("Please fill all details!");
+      return;
+    }
+    setLoading(true);
+
+    try {
+      await register({ firstName, lastName, email, password });
+      setTabValue(0);
+    } catch (error) {
+      setErrorMsg(error.message);
+    }
+
+    setLoading(false);
+  };
+
+  const handleTabChange = (_, newValue) => setTabValue(newValue);
 
   if (loading) return <Spinner />;
 
@@ -67,18 +86,6 @@ const Auth = () => {
     );
   }
 
-  if (success) {
-    return (
-      <Alert
-        severity="success"
-        variant="filled"
-        style={{ ...paperStyle, height: 50 }}
-      >
-        <Typography variant="h6">Please check your email</Typography>
-      </Alert>
-    );
-  }
-
   return (
     <Grid>
       <Paper elevation={10} style={paperStyle}>
@@ -86,28 +93,100 @@ const Auth = () => {
           <Avatar style={avatarStyle}>
             <LockOutlinedIcon />
           </Avatar>
-          <h2>Sign In</h2>
+          <Tabs value={tabValue} onChange={handleTabChange} centered>
+            <Tab label="Sign In" />
+            <Tab label="Register" />
+          </Tabs>
         </Grid>
-        <TextField
-          label="Email"
-          type="email"
-          autoFocus
-          placeholder="Enter email"
-          variant="outlined"
-          fullWidth
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <Button
-          type="submit"
-          color="primary"
-          variant="contained"
-          style={btnstyle}
-          fullWidth
-          onClick={handleLogin}
-        >
-          Sign in
-        </Button>
+        {tabValue === 0 && (
+          <>
+            <TextField
+              label="Email"
+              type="email"
+              autoFocus
+              placeholder="Enter email"
+              variant="outlined"
+              fullWidth
+              value={email}
+              sx={fieldStyle}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <TextField
+              label="Password"
+              type="password"
+              placeholder="Enter password"
+              variant="outlined"
+              fullWidth
+              value={password}
+              sx={fieldStyle}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Button
+              type="submit"
+              color="primary"
+              variant="contained"
+              style={btnstyle}
+              fullWidth
+              onClick={handleLogin}
+            >
+              Sign in
+            </Button>
+          </>
+        )}
+        {tabValue === 1 && (
+          <>
+            <TextField
+              label="First Name"
+              type="text"
+              placeholder="Enter first name"
+              variant="outlined"
+              fullWidth
+              value={firstName}
+              sx={fieldStyle}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+            <TextField
+              label="Last Name"
+              type="text"
+              placeholder="Enter last name"
+              variant="outlined"
+              fullWidth
+              value={lastName}
+              sx={fieldStyle}
+              onChange={(e) => setLastName(e.target.value)}
+            />
+            <TextField
+              label="Email"
+              type="email"
+              placeholder="Enter email"
+              variant="outlined"
+              fullWidth
+              value={email}
+              sx={fieldStyle}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <TextField
+              label="Password"
+              type="password"
+              placeholder="Enter password"
+              variant="outlined"
+              fullWidth
+              value={password}
+              sx={fieldStyle}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Button
+              type="submit"
+              color="primary"
+              variant="contained"
+              style={btnstyle}
+              fullWidth
+              onClick={handleRegister}
+            >
+              Register
+            </Button>
+          </>
+        )}
       </Paper>
     </Grid>
   );
