@@ -5,10 +5,9 @@ import {
   Avatar,
   TextField,
   Button,
-  Alert,
-  Typography,
   Tab,
   Tabs,
+  Snackbar,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
@@ -71,23 +70,20 @@ const Auth = ({ setDefaultHeaders }) => {
   };
 
   const handleTabChange = (_, newValue) => setTabValue(newValue);
+  const handleOnClose = () => setErrorMsg("");
 
   if (loading) return <Spinner />;
 
-  if (errorMsg.length) {
-    return (
-      <Alert
-        severity="error"
-        variant="filled"
-        style={{ ...paperStyle, height: 150 }}
-      >
-        <Typography variant="h6">{errorMsg}</Typography>
-      </Alert>
-    );
-  }
-
   return (
     <Grid>
+      {errorMsg.length && (
+        <Snackbar
+          open={errorMsg.length > 0}
+          onClose={handleOnClose}
+          autoHideDuration={6000}
+          message={errorMsg}
+        />
+      )}
       <Paper elevation={10} style={paperStyle}>
         <Grid align="center">
           <Avatar style={avatarStyle}>
