@@ -51,7 +51,7 @@ export default function MovieCard({ movie, action }) {
   };
 
   const favourites = data || [];
-  movie.favourite = favourites.some((fav) => fav.movie_id === movie.id);
+  movie.favourite = favourites.some((fav) => fav === movie.id);
   movie.release_date_full = toReadableDate(movie.release_date);
 
   return (

@@ -12,7 +12,7 @@ import MovieFilterUI, {
 } from "../components/movieFilterUI";
 
 import { MoviesContext } from "../contexts/moviesContext";
-import { getMovies } from "../api/tmdb-api";
+import { getMovies } from "../api/apiFactory";
 import { applySortValues, applyFilterValues } from "../util";
 
 const titleFiltering = {

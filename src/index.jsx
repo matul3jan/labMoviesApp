@@ -18,7 +18,7 @@ import ArtistsContextProvider from "./contexts/artistsContext";
 import AddMovieReviewPage from "./pages/addMovieReviewPage";
 import PopularArtistsPage from "./pages/popularArtistsPage";
 import TemplateArtistPage from "./components/templateArtistPage";
-import { getToken, setToken, setUser } from "./api/apiClient";
+import { getToken, setToken, setUser } from "./api/authApiFactory";
 
 const queryClient = new QueryClient({
   defaultOptions: {

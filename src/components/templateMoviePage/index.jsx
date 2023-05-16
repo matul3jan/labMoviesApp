@@ -5,7 +5,7 @@ import Grid from "@mui/material/Grid";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import Spinner from "../spinner";
-import { getMovieImages } from "../../api/tmdb-api";
+import { getMovieImages } from "../../api/apiFactory";
 import img from "../../images/film-poster-placeholder.png";
 
 const styles = {

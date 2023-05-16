@@ -3,7 +3,7 @@ import { useQuery } from "react-query";
 
 import Spinner from "../components/spinner";
 import { ArtistsContext } from "../contexts/artistsContext";
-import { getPopularArtists } from "../api/tmdb-api";
+import { getPopularArtists } from "../api/apiFactory";
 import ArtistListPageTemplate from "../components/templateArtistListPage";
 
 const PopularArtistsPage = ({}) => {

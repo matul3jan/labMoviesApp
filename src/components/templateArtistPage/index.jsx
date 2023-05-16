@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 
 import Grid from "@mui/material/Grid";
 import Spinner from "../spinner";
-import { getArtistDetails } from "../../api/tmdb-api";
+import { getArtistDetails } from "../../api/apiFactory";
 import { useParams } from "react-router-dom";
 import { Paper, Typography } from "@mui/material";
 import img from "../../images/film-poster-placeholder.png";

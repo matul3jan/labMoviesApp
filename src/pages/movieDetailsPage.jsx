@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import MovieDetails from "../components/movieDetails";
 import PageTemplate from "../components/templateMoviePage";
 import Spinner from "../components/spinner";
-import { getMovie } from "../api/tmdb-api";
+import { getMovie } from "../api/apiFactory";
 
 const MovieDetailsPage = () => {
   const { id } = useParams();

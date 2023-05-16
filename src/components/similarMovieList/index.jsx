@@ -5,7 +5,7 @@ import MovieCard from "../movieCard";
 import Spinner from "../spinner";
 import AddToFavouritesIcon from "../cardIcons/addToFavourites";
 
-import { getSimilarMovies } from "../../api/tmdb-api";
+import { getSimilarMovies } from "../../api/apiFactory";
 import { Typography } from "@mui/material";
 
 const styles = {

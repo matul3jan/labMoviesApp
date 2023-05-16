@@ -12,7 +12,7 @@ import {
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
 import Spinner from "../components/spinner";
-import { authenticate, register } from "../api/apiClient";
+import { authenticate, register } from "../api/authApiFactory";
 
 const Auth = ({ setDefaultHeaders }) => {
   const paperStyle = {
@@ -76,7 +76,7 @@ const Auth = ({ setDefaultHeaders }) => {
 
   return (
     <Grid>
-      {errorMsg.length && (
+      {errorMsg.length > 0 && (
         <Snackbar
           open={errorMsg.length > 0}
           onClose={handleOnClose}

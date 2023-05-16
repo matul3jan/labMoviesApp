@@ -22,7 +22,7 @@ const styles = {
 const MovieHeader = ({ movie }) => {
   const { data } = useFavourites();
   const favourites = data || [];
-  const isFavourite = favourites.some((fav) => fav.movie_id === movie.id);
+  const isFavourite = favourites.some((fav) => fav === movie.id);
 
   return (
     <Paper sx={styles.root}>

@@ -1,40 +1,39 @@
 import { useQuery, useMutation } from 'react-query'
-import { supabase } from "../api/supabaseClient";
-
-const getUser = async () => {
-    const session = await supabase.auth.getSession();
-    return session?.data?.session?.user;
-}
+import { fetcher, getUser } from '../api/authApiFactory';
 
 const fetchFavourites = async () => {
-    const user = await getUser();
-    const { data, error } = await supabase.from('favourites')
-        .select()
-        .eq('user_id', user?.id)
-    if (error) throw new Error(error.message);
-    return data;
+    const user = getUser();
+    const response = await fetcher(`/api/accounts/${user.id}/favourites`);
+    if (!response.ok) {
+        throw new Error('Error fetching favourites');
+    }
+    return await response.json();
 }
 
 const addToFavourites = async (movie) => {
-    const user = await getUser();
-    const { data, error } = await supabase.from('favourites')
-        .upsert(
-            { movie_id: movie?.id, user_id: user?.id },
-            { onConflict: 'user_id, movie_id' }
-        ).single()
-    if (error) throw error;
-    return data;
+    const user = getUser();
+    const response = await fetcher(`api/accounts/${user.id}/favourites`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ movieId: movie.id })
+    });
+    if (!response.ok) {
+        throw new Error('Error adding to favourite');
+    }
+    return await response.json();
 }
 
 const removeFromFavourites = async (movie) => {
-    const user = await getUser();
-    const { data, error } = await supabase.from("favourites")
-        .delete()
-        .eq("movie_id", movie?.id)
-        .eq("user_id", user?.id)
-        .single();
-    if (error) throw error;
-    return data;
+    const user = getUser();
+    const response = await fetcher(`/api/accounts/${user.id}/favourites`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ movieId: movie.id })
+    });
+    if (!response.ok) {
+        throw new Error('Error adding to favourite');
+    }
+    return await response.json();
 };
 
 export function useFavourites() {

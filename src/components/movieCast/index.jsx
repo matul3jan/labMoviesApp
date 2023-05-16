@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from "react-query";
 
 import Spinner from "../spinner";
-import { getMovieCast } from "../../api/tmdb-api";
+import { getMovieCast } from "../../api/apiFactory";
 import CastCard from "../castCard";
 
 const styles = {

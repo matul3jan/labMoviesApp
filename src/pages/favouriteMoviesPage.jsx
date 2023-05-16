@@ -1,7 +1,7 @@
 import { useQueries } from "react-query";
 
 import PageTemplate from "../components/templateMovieListPage";
-import { getMovie } from "../api/tmdb-api";
+import { getMovie } from "../api/apiFactory";
 import Spinner from "../components/spinner";
 import useFiltering from "../hooks/useFiltering";
 import MovieFilterUI, { titleFilter } from "../components/movieFilterUI";
@@ -47,7 +47,7 @@ const FavouriteMoviesPage = () => {
   // Create an array of queries and run them in parallel.
   const allQueries = useQueries(
     favourites.map((fav) => ({
-      queryKey: ["movie", { id: fav.movie_id }],
+      queryKey: ["movie", { id: fav }],
       queryFn: getMovie,
     }))
   );

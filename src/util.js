@@ -1,5 +1,5 @@
 import truncate from "lodash/truncate";
-import { getToken } from "./api/apiClient";
+import { getToken } from "./api/authApiFactory";
 
 export function excerpt(string) {
     return truncate(string, {

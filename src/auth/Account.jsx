@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Grid, TextField } from "@mui/material";
-import { getUser, logOutUser, updateUser } from "../api/apiClient";
+import { getUser, logOutUser, updateUser } from "../api/authApiFactory";
 
 const styles = {
   container: {
