@@ -10,8 +10,7 @@ export default defineConfig({
       '/api': {
         target: 'https://tmdb-client-api.onrender.com',
         changeOrigin: true,
-        secure: false,
-        rewrite: (path) => path.replace(/^\/api/, '')
+        secure: false
       }
     }
   }

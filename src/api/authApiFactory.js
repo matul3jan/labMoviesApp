@@ -14,7 +14,7 @@ export const logOutUser = () => {
 
 export async function register({ firstName, lastName, email, password }) {
     try {
-        const response = await fetcher(`api/accounts/`, {
+        const response = await fetcher(`/api/accounts/`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ firstName, lastName, email, password })
@@ -30,7 +30,7 @@ export async function register({ firstName, lastName, email, password }) {
 }
 
 export async function authenticate({ email, password }) {
-    const response = await fetcher("api/accounts/security/token", {
+    const response = await fetcher("/api/accounts/security/token", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -45,7 +45,7 @@ export async function authenticate({ email, password }) {
 
 export async function updateUser({ firstName, lastName }) {
     try {
-        const response = await fetcher(`api/accounts/` + getUser().id, {
+        const response = await fetcher(`/api/accounts/` + getUser().id, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ firstName, lastName })
