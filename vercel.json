@@ -1,12 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/api/:path*",
-      "destination": "https://tmdb-client-api.onrender.com/:path*"
-    },
-    {
-      "source": "/proxy/:match*",
-      "destination": "https://tmdb-client-api.onrender.com/:match*"
+      "source": "/api/(.*)",
+      "destination": "/api"
     },
     {
       "source": "/(.*)",

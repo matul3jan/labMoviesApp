@@ -14,7 +14,7 @@ export const logOutUser = () => {
 
 export async function register({ firstName, lastName, email, password }) {
     try {
-        const response = await fetcher(`/api/accounts/`, {
+        const response = await fetcher(`/api/accounts`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ firstName, lastName, email, password })
