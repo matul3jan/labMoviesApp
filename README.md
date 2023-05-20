@@ -117,21 +117,6 @@ The Movies application is a React SPA that displays information about popular mo
   <img width="800" alt="image" src="https://user-images.githubusercontent.com/26350749/230728444-df5fffe0-c1d3-4bdb-a20f-7720e4a46ea8.png">
 </p>
 
-
-## Authentication
-
-| Route  | info |
-| ------------- | ------------- |
-| /  | Paginated list of movies from the Discover endpoint  |
-| /movies/:id  | Detailed information on a specific movie  |
-| /movies/upcoming | Paginated list of movies from the upcoming endpoint |
-| /artists/popular | Paginated list of actors from the person endpoint |
-| /artists/:id | A specific actor's bio |
-| /account | Logged in users profile (name, email, photo, website) |
-| /movies/favourites | List of users favourite movies (persisted) |
-| /reviews/:id | The full text of a movie review | 
-| /reviews/form | Form to write a review for movie | 
-
 #### Protected features
 
 Only logged in and authenticated users can access the entire application
@@ -140,6 +125,4 @@ Only logged in and authenticated users can access the entire application
 
 ### Live application - https://movies-app-reactjs.vercel.app/
 
-<p align="center">
-  <img width="800" alt="image" src="https://user-images.githubusercontent.com/26350749/230716645-43baa64e-e597-4bb3-b8ef-0ac6075c3e9a.png">
-</p>
+### Backend API Project - https://github.com/matul3jan/ewd-api-labs-2023
