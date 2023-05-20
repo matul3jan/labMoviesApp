@@ -136,28 +136,10 @@ The Movies application is a React SPA that displays information about popular mo
 
 Only logged in and authenticated users can access the entire application
 
-## Supabase
-
-<p align="center">
-  <img width="800" alt="image" src="https://user-images.githubusercontent.com/26350749/230716502-7611cd23-5d63-43dc-8e23-a72155305049.png">
-</p>
-
 ## Deployment
 
 ### Live application - https://movies-app-reactjs.vercel.app/
 
 <p align="center">
   <img width="800" alt="image" src="https://user-images.githubusercontent.com/26350749/230716645-43baa64e-e597-4bb3-b8ef-0ac6075c3e9a.png">
-</p>
-  
-## Persistence
-
-> 2 Supabase (Postgres) tables used for persisting favourites & user profile (via auth)
-
-<p align="center">
-  <img width="800" alt="image" src="https://user-images.githubusercontent.com/26350749/230716706-138451c2-2053-4769-a8d7-713dd07b0862.png">
-</p>
-
-<p align="center">
-  <img width="800" alt="image" src="https://user-images.githubusercontent.com/26350749/230716742-644be0dc-0134-46c0-9a3e-d4c58a32167f.png">
 </p>
