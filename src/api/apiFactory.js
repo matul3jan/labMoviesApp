@@ -1,4 +1,4 @@
-import { fetcher } from "./authApiFactory";
+import { fetcher } from "../util";
 
 export const getMovies = (page) => fetcher(`/api/movies?page=${page}`)
     .then((res) => res.json())

@@ -1,6 +1,4 @@
-import { updateOptions } from "../util";
-
-export const fetcher = async (url, options) => await fetch(url, updateOptions(options));
+import { fetcher } from "../util";
 
 export const getToken = () => localStorage.getItem("token");
 export const setToken = (token) => localStorage.setItem("token", token);

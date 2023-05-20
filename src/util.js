@@ -45,7 +45,9 @@ export function toReadableLanguage(code) {
     return languageNames.of(code);
 }
 
-export function updateOptions(options) {
+export const fetcher = async (url, options) => await fetch(url, updateOptions(options));
+
+function updateOptions(options) {
     const update = { ...options };
     const token = getToken();
     if (token) {

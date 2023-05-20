@@ -1,5 +1,6 @@
 import { useQuery, useMutation } from 'react-query'
-import { fetcher, getUser } from '../api/authApiFactory';
+import { getUser } from '../api/authApiFactory';
+import { fetcher } from '../util';
 
 const fetchFavourites = async () => {
     const user = getUser();
